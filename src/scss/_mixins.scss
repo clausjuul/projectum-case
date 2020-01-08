@@ -1,0 +1,81 @@
+@import './vendor/include-media';
+
+@mixin spacing ($top:0, $bottom:0) {
+
+  padding: $top $smallSpacing $bottom;
+  max-width: calc(#{$max-width} + #{$smallSpacing} * 2);
+
+  @include media('>phone') {
+    padding: $top $spacing $bottom;
+    max-width: calc(#{$max-width} + #{$spacing} * 2);
+  }
+
+  @include media('>=tablet') {
+    padding: $top $largeSpacing $bottom;
+    max-width: calc(#{$max-width} + #{$largeSpacing} * 2);
+  }
+}
+
+@mixin alignCenter () {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+@mixin makeGrid3($gap-column: 1rem, $gap-row: 1rem) {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: $gap-column $gap-row;
+
+  @include media('>phone') {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  @include media('>=tablet') {
+    grid-gap: calc(#{$gap-column} * 2) calc(#{$gap-row} * 2);
+  }
+}
+
+@mixin makeGrid4($gap-column: 1rem, $gap-row: 1rem) {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: $gap-column $gap-row;
+
+  @include media('>phone') {
+    grid-template-columns: 1fr 1fr;
+    grid-gap: $gap-column $gap-row;
+  }
+
+  @include media('>=tablet') {
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: calc(#{$gap-column} * 2) calc(#{$gap-row} * 2);
+  }
+}
+
+%withSpacingParent {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  // @include spacing();
+}
+
+@mixin withSpacingParent ($top:0, $bottom:0) {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  // @include spacing($top, $bottom);
+}
+
+@mixin withSpacing ($top:0, $bottom:0) {
+  width: 100%;
+  max-width: $max-width;
+  align-self: center;
+  @include spacing($top, $bottom);
+}
+
+%withSpacing {
+  width: 100%;
+  max-width: $max-width;
+  align-self: center;
+}

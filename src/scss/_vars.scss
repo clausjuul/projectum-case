@@ -1,0 +1,46 @@
+@import './vendor/include-media';
+
+$breakpoints: (
+  'phone': 480px,
+  'tablet': 801px,
+  'desktop': 1124px,
+);
+
+// $max-width: 55rem;
+$max-width: 1000px;
+$max-width-small: 600px;
+
+$font: 'Montserrat', 'Open Sans', sans-serif;
+$rem-size: calc(12px + 0.7vmin);
+$rem-size: 16px;
+$line-height: 1.35;
+
+$borderRadiusS: 1px;
+$borderRadius: 0.5rem;
+$rowHeightHeader: 4.5rem;
+$rowHeightTotal: 2.5rem;
+$rowHeight: 2.5rem;
+$cellWidth: 10rem;
+$cellPadding: 1rem;
+$cellMargin: 0.5rem;
+$cellMarginS: 1px;
+$headerCellPadding: 0 0.5rem 0 1rem;
+
+$smallSpacing: 0.75rem;
+$spacing: 3rem;
+$largeSpacing: 15vw;
+
+$box-shadow-dreamy: 0 0.04rem 0.08rem rgba(0, 0, 0, 0.07),
+0 0.08rem 0.16rem rgba(0, 0, 0, 0.07),
+0 0.16rem 0.32rem rgba(0, 0, 0, 0.07),
+0 0.32rem 0.64rem rgba(0, 0, 0, 0.07),
+0 0.64rem 1.28rem rgba(0, 0, 0, 0.07),
+0 1.28rem 2.4rem rgba(0, 0, 0, 0.07);
+
+$box-shadow-dreamy-dark: 0 0.04rem 0.08rem rgba(0, 0, 0, 0.04),
+0 0.08rem 0.16rem rgba(0, 0, 0, 0.04),
+0 0.16rem 0.32rem rgba(0, 0, 0, 0.04),
+0 0.32rem 0.64rem rgba(0, 0, 0, 0.04),
+0 0.64rem 1.28rem rgba(0, 0, 0, 0.04);
+
+

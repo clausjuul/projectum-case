@@ -1,0 +1,204 @@
+@import '../../../scss/init';
+
+.data-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  cursor: grab;
+}
+
+.data {
+  display: flex;
+  position: absolute;
+  width: 100%;
+  user-select: none;
+
+  & tr {
+    display: flex;
+    flex-direction: column;
+    min-width: min-content;
+    flex-shrink: 0;
+  }
+
+  &__row {
+    &__header {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      padding: 0 $cellPadding;
+      height: $rowHeightHeader;
+      background: var(--cellBg);
+      margin-bottom: $cellMargin;
+      // box-shadow: 0 0 20px black;
+      border-top: 1px solid var(--headerBorder);
+      border-bottom: 1px solid var(--headerBorder);
+
+      &::before {
+        content: '';
+        position: absolute;
+        width: 1px;
+        height: 60%;
+        background: var(--cellRuler);
+        right: 0;
+        top: 20%;
+      }
+
+      &--week {
+        font-size: 0.7rem;
+        padding-top: 0.25rem;
+
+        div {
+          text-align: center;
+        }
+      }
+
+      &--date {
+        color: var(--highlight);
+        // text-shadow: 0 0 0.1rem var(--semiHighlight);
+        font-weight: var(--fwL);
+      }
+
+      &--r-a {
+        display: flex;
+        width: 100%;
+        font-size: 0.8rem;
+  
+        span {
+          flex: 0 0 50%;
+          text-align: center;
+        }
+      }
+    }
+
+    &__item, &__total {
+      position: relative;
+      display: flex;
+      padding: 0 $cellPadding;
+      min-width: $cellWidth;
+      height: 100%;
+      overflow: hidden;
+
+      &::before {
+        content: '';
+        position: absolute;
+        width: 1px;
+        height: 60%;
+        background: var(--cellRuler);
+        left: 0;
+        top: 20%;
+      }
+
+      .data-cell {
+        @include alignCenter;
+        position: relative;
+        height: 100%;
+        width: 50%;
+        font-size: 0.9rem;
+        font-weight: var(--fwS);
+        font-family: 'Titillium Web', sans-serif;
+
+        .editInput {
+          width: 100%;
+          border: none;
+          border-radius: $borderRadius;
+          padding: 5px 2px 5px 7px;
+          background: rgba(0, 0, 0, 0.09);
+          color: inherit;
+          font-size: inherit;
+          font-size: 0.85rem;
+          font-family: inherit;
+          font-weight: inherit;
+          // outline: var(--highlight);
+          // outline-style: outset;
+          // -moz-outline-radius: 0.5rem;
+        }
+        
+        &:first-of-type {
+          justify-content: flex-end;
+          padding-right: 0.4rem;
+        }
+        
+        &:last-of-type {
+          justify-content: flex-start;
+          padding-left: 0.4rem;
+        }
+      }
+    }
+
+    &__total {
+      background: var(--totalBg);
+      flex: 0 0 $rowHeightTotal;
+      margin-bottom: $cellMargin;
+      color: var(--totalText);
+      border-top: 1px solid var(--totalBorder);
+      border-bottom: 1px solid var(--totalBorder);
+      // font-weight: var(--fwGroup);
+    }
+
+    &__item {
+      flex: 0 0 $rowHeight;
+      background: var(--cellBg);
+      margin-bottom: $cellMarginS;
+      // border-top: 1px solid var(--cellBorder);
+      // border-bottom: 1px solid var(--cellBorder);
+      
+      &.isGroup {
+        background: var(--groupBg);
+        border-top: 1px solid var(--groupBorder);
+        // border-bottom: 1px solid var(--groupBorder);
+
+        span {
+          color: var(--groupText);
+          font-weight: var(--fwGroup);
+        }
+      }
+
+      &.isLast {
+        margin-bottom: $cellMargin;
+        border-bottom: 1px solid var(--groupBorder);
+      }
+    }
+  }
+}
+
+.green span::before, 
+.red span::before, 
+.yellow span::before {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  // bottom: 0;
+  height: 1px;
+  width: 80%;
+  max-width: 62px;
+}
+.red span::before {
+  background: var(--redHighlight);
+  box-shadow: 0 0 3px var(--redHighlight);
+  // opacity: 0.6;
+}
+.green span::before {
+  background: var(--greenHighlight);
+  box-shadow: 0 0 3px var(--greenHighlight);
+  // opacity: 0.8;
+}
+.yellow span::before {
+  background: var(--yellowHighlight);
+  box-shadow: 0 0 3px var(--yellowHighlight);
+  // opacity: 0.7;
+}
+.yellow span:first-of-type::before,
+.green span:first-of-type::before,
+.red span:first-of-type::before {
+  right: 0;
+}
+.yellow span:last-of-type::before,
+.green span:last-of-type::before,
+.red span:last-of-type::before {
+  left: 0;
+}
+
+

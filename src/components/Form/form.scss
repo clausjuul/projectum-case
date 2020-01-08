@@ -1,0 +1,68 @@
+@import "'../../../../scss/init";
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  background: var(--mainBg);
+  color: var(--mainText);
+  border-radius: $borderRadius;
+
+  legend h3 {
+    font-weight: 400;
+    font-size: 1.5rem;
+    color: var(--fullColor);
+    margin-bottom: 1rem;
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    label {
+      margin-bottom: 0.25rem;
+      color: var(--fullColor);
+      padding-left: 0.5rem;
+    }
+    
+    input {
+      width: 100%;
+      margin-bottom: 0.5rem;
+      background: var(--cellBg);
+      color: inherit;
+      font-family: inherit;
+      font-size: inherit;
+      font-weight: inherit;
+      border: none;
+      border-radius: $borderRadius;
+      padding: 0.5rem 1rem;
+      margin-bottom: 1rem;
+    }
+  }
+
+  .submitBtn {
+    width: 100%;
+    background: var(--cellBg);
+    color: var(--fullColor);
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    border: none;
+    padding: 0.5rem 1rem;
+    margin-top: 0.75rem;
+    border-radius: $borderRadius;
+    max-width: 12.5rem;
+    letter-spacing: 1px;
+    box-shadow: $box-shadow-dreamy;
+    transition: 200ms ease-in-out;
+    cursor: pointer;
+    
+    &:hover {
+      transition: 400ms ease-in-out;
+      box-shadow: $box-shadow-dreamy-dark;
+    }
+  }
+}

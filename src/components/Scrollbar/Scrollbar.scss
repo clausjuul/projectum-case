@@ -1,0 +1,35 @@
+@import '../../scss/init';
+
+$scrollbar-barWidth: 1.5rem;
+$scrollbarHeight: 0.5rem;
+
+.scroll {
+  width: 100%;
+  max-width: 200px;
+  padding: 0 1rem;
+
+  &bar {
+    position: relative;
+    width: 100%;
+    background: var(--groupBg);
+    height: $scrollbarHeight;
+    border-radius: 15px;
+    padding-right: $scrollbar-barWidth;
+
+    &__inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      padding-right: $scrollbar-barWidth;
+
+      div {
+        position: absolute;
+        height: 100%;
+        width: $scrollbar-barWidth;
+        border-radius: 15px;
+        background: var(--highlight);
+        box-shadow: 0 0 0.25rem var(--semiHighlight);
+      }
+    }
+  }
+}

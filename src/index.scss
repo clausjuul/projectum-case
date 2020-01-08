@@ -1,0 +1,44 @@
+@import './scss/init';
+
+html {
+  font-size: $rem-size;
+  font-size: calc(11px + 0.6vmin);
+  // font-size: 16px;
+}
+
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #ffffff;
+  // color: rgba(255, 255, 255, 0.86);
+  width: 100vw;
+  min-height: 100vh;
+}
+
+#root {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+h1, h3 {
+  margin: 0;
+}
+

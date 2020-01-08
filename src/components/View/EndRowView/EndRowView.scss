@@ -1,0 +1,114 @@
+@import '../../../scss/init';
+
+// .controls {
+//   display: flex;
+//   // flex-direction: column;
+//   justify-content: space-between;
+//   align-items: center;
+//   width: 100%;
+//   height: 100%;
+//   // padding: 0.25rem 0 0.25rem 1rem;
+//   // flex-wrap: wrap;
+
+//   .arrow {
+//     background: var(--cellBg);
+//   }
+// }
+
+.end-row {
+  li::before {
+      content: '';
+      position: absolute;
+      width: 1px;
+      height: 60%;
+      background: var(--cellRuler);
+      left: 0;
+      top: 20%;
+    }
+
+    @at-root .end-row__item--edit.isGroup,
+    &__header--edit,
+    &__total--edit,
+    &__item--edit {
+      position: relative;
+      margin-left: -1px;
+
+      &::after {
+        content: '';
+        position: absolute;
+        height: calc(100% - 2px);
+        width: 0.75rem;
+        right: 100%;
+        top: 1px;
+        // z-index: +1;
+        // background: linear-gradient(to right, transparent 0%, $rowBg 99%);
+      }
+    }
+
+  &__header--edit {
+    background: var(--cellBg);
+    height: $rowHeightHeader;
+    border-radius: 0 $borderRadius $borderRadius 0;
+    margin-bottom: $cellMargin;
+
+    &::after {
+      background: linear-gradient(to right, transparent 0%, var(--cellBg) 99%);
+    }
+  }
+
+  &__total--edit {
+    background: var(--totalBg);
+    height: $rowHeightTotal;
+    border-radius: 0 $borderRadius $borderRadius 0;
+    margin-bottom: $cellMargin;
+    border-top: 1px solid var(--totalBorder);
+    border-bottom: 1px solid var(--totalBorder);
+    // border-right: 1px solid var(--totalBorder);
+
+    &::after {
+      background: linear-gradient(to right, transparent 0%, var(--totalBg) 99%);
+    }
+  }
+
+  &__item--edit {
+    @include alignCenter;
+    height: $rowHeight;
+    background: var(--cellBg);
+    margin-bottom: $cellMarginS;
+    border-radius: 0 $borderRadiusS $borderRadiusS 0;
+    // border-top: 1px solid var(--cellBorder);
+    // border-bottom: 1px solid var(--cellBorder);
+    // border-right: 1px solid var(--cellBorder);
+
+    &.isLast {
+      border-radius: 0 $borderRadiusS $borderRadius 0;
+      margin-bottom: $cellMargin;
+      // border-top: 1px solid var(--groupBorder);
+      border-bottom: 1px solid var(--groupBorder);
+    }
+
+    svg {
+      color: var(--groupText);
+      // opacity: 0.8;
+      width: 1.75rem;
+      height: 1.75rem;
+      transform: rotate(-90deg);
+    }
+
+    &::after {
+      background: linear-gradient(to right, transparent 0%, var(--cellBg) 99%);
+    }
+  }
+  .isGroup {
+    background: var(--groupBg);
+
+    border-radius: 0 $borderRadius $borderRadiusS 0;
+    border-top: 1px solid var(--groupBorder);
+    // border-bottom: 1px solid var(--groupBorder);
+    // border-right: 1px solid var(--groupBorder);
+
+    &::after {
+      background: linear-gradient(to right, transparent 0%, var(--groupBg) 99%);
+    }
+  }
+}

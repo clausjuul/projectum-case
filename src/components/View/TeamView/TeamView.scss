@@ -1,0 +1,212 @@
+@import '../../../scss/init';
+
+// .controls {
+//   display: flex;
+//   // flex-direction: column;
+//   justify-content: space-between;
+//   align-items: center;
+//   width: 100%;
+//   height: 100%;
+// }
+
+.arrow {
+  @include alignCenter;
+  background: var(--cellBg);
+  height: 100%;
+  width: 1.75rem;
+  border-radius: $borderRadius 0 0 $borderRadius;
+  border-top: 1px solid var(--headerBorder);
+  // border-left: 1px solid var(--cellBorder);
+  border-bottom: 1px solid var(--headerBorder);
+  color: var(--highlight);
+  cursor: pointer;
+
+  &.disabled svg {
+    opacity: 0.3;
+    cursor: default;
+  }
+
+  svg {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+}
+
+// .control-buttons {
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   // align-items: center;
+//   width: calc(100% - 2.75rem);
+//   height: 100%;
+//   // padding: 0.25rem 0 0.25rem 0rem;
+
+//   .btn {
+//     display: flex;
+//     align-items: center;
+//     cursor: pointer;
+//     padding: 0rem 1rem 0 10%;
+//     height: calc(#{$rowHeightHeader} / 2);
+//     border-radius: $borderRadius;
+//     border: 1px solid var(--cellBorder);
+//     color: var(--groupText);
+//     // color: $highlight;
+//     // text-shadow: 0 0 0.35rem $highlight;
+//     // font-weight: 400;
+//     font-size: 0.8rem;
+//     background: var(--cellBg);
+
+//     &:first-of-type {
+//       margin-bottom: 0.5rem;
+      
+//       svg {
+//         height: 1.55rem;
+//         width: 1.55rem;
+//         margin-right: 0.5rem;
+//       }
+//     }
+
+//     &:last-of-type svg {
+//       height: 1.35rem;
+//       width: 1.35rem;
+//       margin-right: 0.7rem;
+//     }
+//   }
+// }
+
+.team {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  min-width: min-content;
+
+  @at-root .team__item.isGroup,
+  &__header,
+  &__total,
+  &__item {
+      position: relative;
+      display: flex;
+      align-items: center;
+      // margin-bottom: $cellMargin;
+      min-width: 10rem;
+
+      &::before {
+        content: '';
+        position: absolute;
+        width: 1px;
+        height: 60%;
+        background: var(--cellRuler);
+        right: 0;
+        top: 20%;
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        height: calc(100% - 2px);
+        width: 0.75rem;
+        left: 100%;
+        top: 1px;
+        z-index: +1;
+      }
+    }
+
+  &__header {
+    @include alignCenter;
+    flex-direction: column;
+    height: $rowHeightHeader;
+    margin-bottom: $cellMargin;
+    // background: $columnHeaderBg;
+    border-radius: $borderRadius 0 0 $borderRadius;
+    
+    &::after {
+      background: linear-gradient(to left, transparent 0%, var(--cellBg) 99%);
+    }
+  }
+  
+  &__total {
+    justify-content: flex-end;
+    padding: 0 3rem 0 1rem;
+    height: $rowHeightTotal;
+    border-radius: $borderRadius 0 0 $borderRadius;
+    background: var(--totalBg);
+    font-weight: var(--fwL);
+    letter-spacing: 1px;
+    color: var(--totalText);
+    margin-bottom: $cellMargin;
+
+    border-top: 1px solid var(--totalBorder);
+    border-bottom: 1px solid var(--totalBorder);
+    // border-left: 1px solid var(--totalBorder);
+    
+    &::after {
+      background: linear-gradient(to left, transparent 0%, var(--totalBg) 99%);
+    }
+  }
+
+  &__item {
+    justify-content: flex-end;
+    height: $rowHeight;
+    padding: 0 1rem 0 1.5rem;
+    background: var(--cellBg);
+    margin-bottom: $cellMarginS;
+    border-radius: $borderRadiusS 0 0 $borderRadiusS;
+    // border-radius: $borderRadius 0 0 $borderRadius;
+    // border-top: 1px solid var(--cellBorder);
+    // border-bottom: 1px solid var(--cellBorder);
+    // border-left: 1px solid var(--cellBorder);
+    font-weight: var(--fwS);
+    // color: var(--mainText);
+    font-size: 0.9rem;
+
+    &.isLast {
+      border-radius: $borderRadiusS 0 0 $borderRadius;
+      margin-bottom: $cellMargin;
+      border-bottom: 1px solid var(--groupBorder);
+      // border-left: 1px solid var(--cellBorder);
+    }
+
+    &::after {
+      background: linear-gradient(to left, transparent 0%, var(--cellBg) 99%);
+    }
+
+    &__icon {
+      @include alignCenter;
+      // font-family: 'Roboto', sans-serif;
+      // font-family: 'Titillium Web', sans-serif;
+      margin-left: 0.75rem;
+      border-radius: 100rem;
+      width: 1.65rem;
+      height: 1.65rem;
+      // fallback
+      background: steelblue;
+      color: white;
+      font-size: 0.725rem;
+      font-weight: 400;
+      text-shadow: 
+      0.04rem 0 0.1rem rgba(0, 0, 0, 0.2),
+      -0.04rem 0 0.1rem rgba(0, 0, 0, 0.2),
+      0 0.04rem 0.1rem rgba(0, 0, 0, 0.2),
+      0 -0.04rem 0.1rem rgba(0, 0, 0, 0.2),
+      0 0 0.1rem rgba(0, 0, 0, 0.2),
+      0 0 0.3rem rgba(0, 0, 0, 0.4),
+      0 0 0.7rem rgba(0, 0, 0, 0.4);
+    }
+  }
+  
+  .isGroup {
+    background: var(--groupBg);
+    padding-right: 3rem;
+    border-radius: $borderRadius 0 0 $borderRadiusS;
+    border-top: 1px solid var(--groupBorder);
+    // border-bottom: 1px solid var(--groupBorder);
+    // border-left: 1px solid var(--groupBorder);
+    font-weight: var(--fwL);
+    color: var(--groupText);
+    letter-spacing: 1px;
+
+    &::after {
+      background: linear-gradient(to left, transparent 0%, var(--groupBg) 99%);
+    }
+  }
+}
