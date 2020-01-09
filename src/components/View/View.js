@@ -15,6 +15,8 @@ import EndRowView from './EndRowView/EndRowView';
 import Context from '../Context/Context';
 import './View.scss';
 
+import Logo from '../../logo.png';
+
 const findClosest = (value = 0, counts = [0]) => {
   return counts.reduce(function(prev, curr) {
     return (Math.abs(curr - value) < Math.abs(prev - value) ? curr : prev)
@@ -78,7 +80,7 @@ const View = ({ data }) => {
     return (
     <>
       <ThemeBtn darkmode={darkmode} set={setDarkmode} />
-      <img className="projectum" src="/logo.png" alt="projectum-logo" />
+      <img className="projectum" src={Logo} alt="projectum-logo" />
       <section className="view">
         <div className="topbar">
           <h1 className="site-title">
