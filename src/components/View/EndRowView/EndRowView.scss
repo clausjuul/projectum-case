@@ -33,16 +33,16 @@
       position: relative;
       margin-left: -1px;
 
-      &::after {
-        content: '';
-        position: absolute;
-        height: calc(100% - 2px);
-        width: 0.75rem;
-        right: 100%;
-        top: 1px;
-        // z-index: +1;
-        // background: linear-gradient(to right, transparent 0%, $rowBg 99%);
-      }
+      // &::after {
+      //   content: '';
+      //   position: absolute;
+      //   height: calc(100% - 2px);
+      //   width: 0.75rem;
+      //   right: 100%;
+      //   top: 1px;
+      //   // z-index: +1;
+      //   // background: linear-gradient(to right, transparent 0%, $rowBg 99%);
+      // }
     }
 
   &__header--edit {
@@ -51,9 +51,9 @@
     border-radius: 0 $borderRadius $borderRadius 0;
     margin-bottom: $cellMargin;
 
-    &::after {
-      background: linear-gradient(to right, transparent 0%, var(--cellBg) 99%);
-    }
+    // &::after {
+    //   background: linear-gradient(to right, transparent 0%, var(--cellBg) 99%);
+    // }
   }
 
   &__total--edit {
@@ -65,9 +65,9 @@
     border-bottom: 1px solid var(--totalBorder);
     // border-right: 1px solid var(--totalBorder);
 
-    &::after {
-      background: linear-gradient(to right, transparent 0%, var(--totalBg) 99%);
-    }
+    // &::after {
+    //   background: linear-gradient(to right, transparent 0%, var(--totalBg) 99%);
+    // }
   }
 
   &__item--edit {
@@ -95,9 +95,9 @@
       transform: rotate(-90deg);
     }
 
-    &::after {
-      background: linear-gradient(to right, transparent 0%, var(--cellBg) 99%);
-    }
+    // &::after {
+    //   background: linear-gradient(to right, transparent 0%, var(--cellBg) 99%);
+    // }
   }
   .isGroup {
     background: var(--groupBg);
@@ -107,8 +107,8 @@
     // border-bottom: 1px solid var(--groupBorder);
     // border-right: 1px solid var(--groupBorder);
 
-    &::after {
-      background: linear-gradient(to right, transparent 0%, var(--groupBg) 99%);
-    }
+    // &::after {
+    //   background: linear-gradient(to right, transparent 0%, var(--groupBg) 99%);
+    // }
   }
 }

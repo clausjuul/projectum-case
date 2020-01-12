@@ -31,7 +31,8 @@ const MenuItem = ({ item, index }) => {
         className="btn"
         style={{
           opacity: spring.opacity,
-          transform: spring.x.interpolate(x => `translate3d(0,${x}px,0)`)
+          transform: spring.x.interpolate(x => `translateY(${x}px)`)
+          // transform: spring.x.interpolate(x => `translate3d(0,${x}px,0)`)
         }}
       >
         { item.icon }
@@ -47,14 +48,14 @@ const Controls = ({ scrollLeft, showScroll, editMode, setEditMode, setShowModal 
   const menuItems = [
     {label: 'Opret ny', icon: <AddRoundedIcon />, onClick: setShowModal },
     {label: 'Kage pause', icon: <CakeRoundedIcon />},
-    {label: 'Kaos patruljen', icon: <ChildFriendlyRoundedIcon />},
-    {label: 'Meget laaaaaaaangt menupunkt', icon: <EmojiPeopleRoundedIcon />}
+    {label: 'Kaos-patruljen', icon: <ChildFriendlyRoundedIcon />},
+    {label: 'God weekend', icon: <EmojiPeopleRoundedIcon />}
   ];
 
   const menuTransition = useTransition(showMenu, null, {
     from: { opacity: 0, x: 10 },
     enter: { opacity: 1, x: 0 },
-    leave: { opacity: 0, x: 5 },
+    leave: { opacity: 0, x: 0 },
     config: config.stiff
   });
 
@@ -84,7 +85,8 @@ const Controls = ({ scrollLeft, showScroll, editMode, setEditMode, setShowModal 
               className="menu-container" 
               style={{
                 opacity: props.opacity,
-                transform: props.x.interpolate(x => `translate3d(0,${x}px,0)`)
+                transform: props.x.interpolate(x => `translateY(${x}px)`)
+                // transform: props.x.interpolate(x => `translate3d(0,${x}px,0)`)
               }}
             >
               {menuItems.map((item, i) => (

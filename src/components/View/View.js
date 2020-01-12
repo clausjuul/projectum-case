@@ -2,6 +2,7 @@ import React, { useState, useEffect, useLayoutEffect, useRef, useContext } from 
 import { useSpring } from 'react-spring';
 import { useGesture } from 'react-use-gesture';
 import useMeasure from 'react-use-measure';
+import { ResizeObserver } from '@juggle/resize-observer'
 import clamp from 'lodash.clamp'
 
 import ThemeBtn from './ThemeBtn';
@@ -15,7 +16,7 @@ import EndRowView from './EndRowView/EndRowView';
 import Context from '../Context/Context';
 import './View.scss';
 
-import Logo from '../../logo.png';
+// import Logo from '../../logo.png';
 
 const findClosest = (value = 0, counts = [0]) => {
   return counts.reduce(function(prev, curr) {
@@ -25,7 +26,7 @@ const findClosest = (value = 0, counts = [0]) => {
 
 const View = ({ data }) => {
   const {darkmode, setDarkmode} = useContext(Context);
-  const [ref, bounds] = useMeasure();
+  const [ref, bounds] = useMeasure({ polyfill: ResizeObserver });
 
   const [editMode, setEditMode] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -34,14 +35,18 @@ const View = ({ data }) => {
   const [cellWidth, setCellWidth] = useState(0);
   const scrollSnapPoints = useRef(null);
   const maxClamp = useRef(null);
- 
+  const numberOfCells = useRef(null);
+  const cellIndex = useRef(0);
+  const clampCellIndex = useRef(0);
+  const minCellWidth = 160;
+
   useLayoutEffect(() => {
-  // useEffect(() => {
-    // 160 = minCellWidth
-    let x = bounds.width / 160;
-    let cellW = bounds.width / Math.trunc(x);
+    let x = Math.trunc(bounds.width / minCellWidth);
+    let cellW = bounds.width / x;
     setCellWidth(cellW);
-    maxClamp.current = cellW * (data.data.length - Math.trunc(x))
+    numberOfCells.current = x;
+    maxClamp.current = cellW * (data.data.length - x);
+    clampCellIndex.current = data.data.length - x;
   }, [bounds.width, data])
   
   useLayoutEffect(() => {
@@ -49,7 +54,6 @@ const View = ({ data }) => {
   }, [bounds.width, cellWidth, data])
   
   useEffect(() => {
-    // Calc & sets snap point in array
     let newSnapPoints = [];
     data.data.forEach((_, i) => newSnapPoints.push(i * cellWidth));
     scrollSnapPoints.current = newSnapPoints;
@@ -61,26 +65,36 @@ const View = ({ data }) => {
     onDrag: ({ down, movement: [mx], memo = springX.getValue() }) => {
       if(down) set({ springX: clamp( memo + mx, -maxClamp.current, 0 )})
       else {
-        let close = findClosest(-memo + -mx, scrollSnapPoints.current)
-        set({ springX: clamp( -close, -maxClamp.current, 0 )})
+        let newIndex = findClosest(-memo + -mx, scrollSnapPoints.current) / cellWidth
+        let newIndexClamped = clamp(-newIndex, -clampCellIndex.current, 0)
+        cellIndex.current = newIndexClamped
+        set({ springX: newIndexClamped * cellWidth})
       }
-      return memo
+      return Math.round(memo)
     },
-    onWheel: ({ memo = springX.getValue(), movement: [,my] }) => {
-      set({ springX: clamp( memo + -my, -maxClamp.current, 0)})
-      return memo
+
+    onWheel: ({ active, memo = springX.getValue(), movement: [,my] }) => {
+      if(active) set({ springX: clamp( memo + -my, -maxClamp.current, 0 )})
+      else {
+        let newIndex = findClosest(-memo + my, scrollSnapPoints.current) / cellWidth;
+        let newIndexClamped = clamp(-newIndex, -clampCellIndex.current, 0);
+        cellIndex.current = newIndexClamped;
+        set({ springX: newIndexClamped * cellWidth})
+      }
+      return Math.round(memo)
     }
   }, { dragDelay: true });
 
-  // const addNewRow = useCallback(values => {
-  //   const newData = [...data, {week: values.week, month: values.month, year: values.year, data: []}];
-  //   setData(newData);
-  // }, [data, setData]);
+  const scrollLeft = left => {
+    let newIndex = clamp(cellIndex.current + (left ? 1 : -1), -clampCellIndex.current, 0)
+    cellIndex.current = newIndex
+    set({ springX: newIndex * cellWidth})
+  }
 
     return (
     <>
       <ThemeBtn darkmode={darkmode} set={setDarkmode} />
-      <img className="projectum" src={Logo} alt="projectum-logo" />
+      {/* <img className="projectum" src={Logo} alt="projectum-logo" /> */}
       <section className="view">
         <div className="topbar">
           <h1 className="site-title">
@@ -101,7 +115,7 @@ const View = ({ data }) => {
                 editMode={editMode}
                 setEditMode={setEditMode}
                 showScroll={showScroll} 
-                scrollLeft={() => set({ springX: clamp((springX.getValue() + cellWidth), -maxClamp.current, 0)})}
+                scrollLeft={() => scrollLeft(true)}
                 setShowModal={() => setShowModal(!showModal)}
               />
             </li>
@@ -110,7 +124,6 @@ const View = ({ data }) => {
               showScroll={showScroll}
               editMode={editMode}
               setEditMode={setEditMode}
-              scrollLeft={() => set({ springX: clamp((springX.getValue() + cellWidth), -maxClamp.current, 0)})}
             />
           </ul>
           <table {...bind()} ref={ref} className="data-wrapper">
@@ -125,7 +138,7 @@ const View = ({ data }) => {
             <EndRowView
               data={data} 
               showScroll={showScroll}
-              scrollRight={() => set({ springX: clamp((springX.getValue() - cellWidth), -maxClamp.current, 0)})} 
+              scrollRight={() => scrollLeft(false)} 
             />
           </ul>
         </div>

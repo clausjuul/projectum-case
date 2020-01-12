@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
 import View from './components/View/View';
-// import { ContextProvider } from './components/Context/Context';
+import { ContextProvider } from './components/Context/Context';
 import themes from './themes';
-// import useLocalStorage from './useLocalStorage';
+import useLocalStorage from './useLocalStorage';
 import propData from './data';
 
 const setTheme = (theme) => {
@@ -14,8 +14,7 @@ const setTheme = (theme) => {
 
 const App = () => {
   const [data, setData] = useState(propData);
-  const [darkmode, setDarkmode] = useState(false);
-  // const [darkmode, setDarkmode] = useLocalStorage("theme", true);
+  const [darkmode, setDarkmode] = useLocalStorage("theme", false);
 
   useEffect(() => {
     if (darkmode) setTheme(themes.dark)
@@ -23,10 +22,9 @@ const App = () => {
   }, [darkmode])
 
   return (
-    // <ContextProvider value={{ darkmode, setDarkmode }}>
-    <div>test</div>
-      // <View data={data} setData={setData} />
-    // </ContextProvider>
+    <ContextProvider value={{ darkmode, setDarkmode }}>
+      <View data={data} setData={setData} />
+    </ContextProvider>
   );
 }
 

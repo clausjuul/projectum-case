@@ -104,7 +104,7 @@
         content: '';
         position: absolute;
         height: calc(100% - 2px);
-        width: 0.75rem;
+        width: 2px;
         left: 100%;
         top: 1px;
         z-index: +1;
@@ -120,7 +120,8 @@
     border-radius: $borderRadius 0 0 $borderRadius;
     
     &::after {
-      background: linear-gradient(to left, transparent 0%, var(--cellBg) 99%);
+      // background: linear-gradient(to left, transparent 0%, var(--cellBg) 99%);
+      background: var(--cellBg);
     }
   }
   
@@ -140,7 +141,8 @@
     // border-left: 1px solid var(--totalBorder);
     
     &::after {
-      background: linear-gradient(to left, transparent 0%, var(--totalBg) 99%);
+      // background: linear-gradient(to left, transparent 0%, var(--totalBg) 99%);
+      background: var(--totalBg);
     }
   }
 
@@ -167,7 +169,8 @@
     }
 
     &::after {
-      background: linear-gradient(to left, transparent 0%, var(--cellBg) 99%);
+      // background: linear-gradient(to left, transparent 0%, var(--cellBg) 99%);
+      background: var(--cellBg);
     }
 
     &__icon {
@@ -206,7 +209,8 @@
     letter-spacing: 1px;
 
     &::after {
-      background: linear-gradient(to left, transparent 0%, var(--groupBg) 99%);
+      // background: linear-gradient(to left, transparent 0%, var(--groupBg) 99%);
+      background: var(--groupBg);
     }
   }
 }

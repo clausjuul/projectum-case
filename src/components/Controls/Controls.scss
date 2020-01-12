@@ -31,7 +31,8 @@
     white-space: nowrap;
     height: calc(#{$rowHeightHeader} / 2);
     padding: 0rem 1rem 0 10%;
-    border: 1px solid var(--cellBorder);
+    // border: 1px solid var(--cellBorder);
+    border: none;
     border-radius: $borderRadius;
     color: var(--groupText);
     font-weight: var(--fwL);
@@ -41,27 +42,30 @@
     overflow: hidden;
     outline: none;
     cursor: pointer;
+    z-index: 15;
 
     span {
       display: flex;
       align-items: center;
       height: 100%;
     }
-    
-    &::after {
-      content: '';
-      position: absolute;
-      width: 100%;
-      height: 1px;
-      background: transparent;
-      bottom: 0px;
-      left: 0;
-      transition: 400ms ease-in-out;
-    }
-    
-    &:hover::after  {
-      transition: 200ms ease-in-out;
-      background: var(--semiHighlight);
+
+    @include media('>=tablet') {
+      &::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        background: transparent;
+        bottom: 0px;
+        left: 0;
+        transition: 250ms ease-in-out;
+      }
+      
+      &:hover::after  {
+        transition: 100ms ease-in-out;
+        background: var(--semiHighlight);
+      }
     }
 
     &:first-of-type {
@@ -70,14 +74,14 @@
       svg {
         height: 1.4rem;
         width: 1.4rem;
-        margin-right: 0.5rem;
+        margin-right: 0.7rem;
       }
     }
 
     &:last-of-type svg {
       height: 1.6rem;
       width: 1.6rem;
-      margin-right: 0.7rem;
+      margin-right: 0.5rem;
     }
     svg {
       color: var(--highlight);
@@ -94,15 +98,31 @@
     border-radius: $borderRadius;
     transform-origin: top;
     padding: 0 0.35rem;
-    overflow: hidden;
+    min-width: 100%;
+    // overflow: hidden;
     box-shadow: 0 0.1rem 0.2rem rgba(0, 0, 0, 0.07),
     0 0.2rem 0.5rem rgba(0, 0, 0, 0.07),
     0 0.4rem 1rem rgba(0, 0, 0, 0.07);
 
+    @include media('<=tablet') {
+      &::after {
+        content: '';
+        position: absolute;
+        width: calc(100% - 1rem);
+        height: 1px;
+        background: var(--highlight);
+        top: 0px;
+        left: 0.5rem;
+        opacity: 0.5;
+      }
+    }
+
     li {
-      width: max-content;
+      // width: max-content;
+      // width: 100%;
       min-width: 100%;
       margin: 0.35rem 0;
+
       // padding: calc(#{$cellMarginS / 2}) 0;
       background: var(--cellBg);
       border-radius: $borderRadius;
